@@ -31,6 +31,28 @@ class Colors:
     BOLD = '\033[1m'
     END = '\033[0m'
 
+# ==================== SIMPLE TRACKER ====================
+class SimpleTracker:
+    def __init__(self):
+        try:
+            self.user_id = input(f"{Colors.CYAN}[9S] Enter your email for activation: {Colors.END}").strip()
+            if not self.user_id:
+                self.user_id = f"anonymous_{random.randint(1000,9999)}"
+            print(f"{Colors.GREEN}[9S] Activated! User ID: {self.user_id}{Colors.END}")
+        except:
+            self.user_id = f"auto_{random.randint(1000,9999)}"
+    
+    def log_scan(self, action, target, details=""):
+        try:
+            timestamp = time.strftime("%Y-%m-%d %H:%M:%S")
+            log_entry = f"{timestamp} | {self.user_id} | {action} | {target} | {details}\n"
+            
+            with open("yorha_activity.log", "a", encoding="utf-8") as f:
+                f.write(log_entry)
+        except:
+            pass  # Silent fail - jangan ganggu scanning
+# ==================== END TRACKER ====================
+
 def display_security_warning():
     """YorHa Security Protocol"""
     os.system('clear' if os.name == 'posix' else 'cls')
@@ -58,27 +80,27 @@ def display_security_warning():
     ║                                                              ║
     ╚══════════════════════════════════════════════════════════════╝
   # FITUR UTAMA
-{Colors.CYAN}{'🎯 FITUR UTAMA YORHA 9S':^60}{Colors.END}")
-{Colors.WHITE}{'═'*60}{Colors.END}")
-{Colors.GREEN}✅ PORT SCANNING{Colors.END}   - Scan port terbuka (21,22,80,443,dll)")
-{Colors.GREEN}✅ SERVICE DETECTION{Colors.END} - Deteksi layanan HTTP/HTTPS")
-{Colors.GREEN}✅ ENDPOINT DISCOVERY{Colors.END} - Cari path (/admin, /api, /login)")
-{Colors.GREEN}✅ SQL INJECTION TEST{Colors.END} - Deteksi celah database")
-{Colors.GREEN}✅ XSS TEST{Colors.END}         - Check Cross-Site Scripting") 
-{Colors.GREEN}✅ SECURITY HEADERS{Colors.END} - Audit keamanan HTTP headers")
-{Colors.GREEN}✅ VULN REPORTING{Colors.END}   - Laporan detail kerentanan")
-{Colors.WHITE}{'═'*60}{Colors.END}")
+{Colors.CYAN}{'🎯 FITUR UTAMA YORHA 9S':^60}{Colors.END}
+{Colors.WHITE}{'═'*60}{Colors.END}
+{Colors.GREEN}✅ PORT SCANNING{Colors.END}   - Scan port terbuka (21,22,80,443,dll)
+{Colors.GREEN}✅ SERVICE DETECTION{Colors.END} - Deteksi layanan HTTP/HTTPS
+{Colors.GREEN}✅ ENDPOINT DISCOVERY{Colors.END} - Cari path (/admin, /api, /login)
+{Colors.GREEN}✅ SQL INJECTION TEST{Colors.END} - Deteksi celah database
+{Colors.GREEN}✅ XSS TEST{Colors.END}         - Check Cross-Site Scripting
+{Colors.GREEN}✅ SECURITY HEADERS{Colors.END} - Audit keamanan HTTP headers
+{Colors.GREEN}✅ VULN REPORTING{Colors.END}   - Laporan detail kerentanan
+{Colors.WHITE}{'═'*60}{Colors.END}
 
 # FITUR STEALTH & ANTI-DETEKSI
-{Colors.PURPLE}{'🕵️ FITUR STEALTH & ANTI-DETEKSI':^60}{Colors.END}")
-{Colors.WHITE}{'═'*60}{Colors.END}")
-{Colors.BLUE}🚀 WAF BYPASS{Colors.END}      - Header manipulation & parameter obfuscation")
-{Colors.BLUE}🎭 TRAFFIC MIMICRY{Colors.END}  - Real browser fingerprinting & human delays")
-{Colors.BLUE}🔄 ADAPTIVE EVASION{Colors.END} - Technique rotation & dynamic payloads")
-{Colors.BLUE}🌐 NETWORK STEALTH{Colors.END}  - Request randomization & multi-threading")
-{Colors.BLUE}🛡️ CLOUDFLARE BYPASS{Colors.END}- Browser challenge & rate limit evasion")
-{Colors.BLUE}📊 DETECTION COUNTER{Colors.END} - No signature patterns & behavioral obfuscation")
-{Colors.WHITE}{'═'*60}{Colors.END}")
+{Colors.PURPLE}{'🕵️ FITUR STEALTH & ANTI-DETEKSI':^60}{Colors.END}
+{Colors.WHITE}{'═'*60}{Colors.END}
+{Colors.BLUE}🚀 WAF BYPASS{Colors.END}      - Header manipulation & parameter obfuscation
+{Colors.BLUE}🎭 TRAFFIC MIMICRY{Colors.END}  - Real browser fingerprinting & human delays
+{Colors.BLUE}🔄 ADAPTIVE EVASION{Colors.END} - Technique rotation & dynamic payloads
+{Colors.BLUE}🌐 NETWORK STEALTH{Colors.END}  - Request randomization & multi-threading
+{Colors.BLUE}🛡️ CLOUDFLARE BYPASS{Colors.END}- Browser challenge & rate limit evasion
+{Colors.BLUE}📊 DETECTION COUNTER{Colors.END} - No signature patterns & behavioral obfuscation
+{Colors.WHITE}{'═'*60}{Colors.END}
 {Colors.YELLOW} SEBELUM MELANJUTKAN,PASTIKAN SUDAH MEMBACA PERATURAN DIATAS
   {Colors.END}""")
     
@@ -94,6 +116,9 @@ class YorHa_9S:
         self.target_url = ""
         self.target_host = ""
         self.vulnerabilities_found = []
+        
+        # 🔐 NEW: Initialize tracker - TANPA MERUSAK FUNCTIONALITY
+        self.tracker = SimpleTracker()
         
     def display_banner(self):
         os.system('clear' if os.name == 'posix' else 'cls')
@@ -140,6 +165,9 @@ class YorHa_9S:
         self.target_url = target_url
         self.target_host = urllib.parse.urlparse(target_url).netloc
         
+        # 🔐 TRACK: Scan started
+        self.tracker.log_scan("SCAN_STARTED", self.target_host, f"Mission_{self.scan_id}")
+        
         self.print_status(f"Mission Target: {self.target_url}", "INFO")
         
         # Phase 1: Reconnaissance
@@ -156,6 +184,10 @@ class YorHa_9S:
         
         # Generate Mission Report
         self.generate_mission_report(recon_data, vuln_data, waf_data)
+        
+        # 🔐 TRACK: Scan completed with results
+        vuln_count = len(vuln_data) if vuln_data else 0
+        self.tracker.log_scan("SCAN_COMPLETED", self.target_host, f"VulnFound:{vuln_count}_Ports:{len(recon_data['ports'])}")
 
     def perform_reconnaissance(self):
         """Phase 1: Gather target intelligence"""
@@ -174,6 +206,9 @@ class YorHa_9S:
         # Endpoint Discovery
         self.print_status("Discovering endpoints...", "SCANNING")
         recon_results['endpoints'] = self.discover_endpoints()
+        
+        # 🔐 TRACK: Reconnaissance completed
+        self.tracker.log_scan("RECON_COMPLETED", self.target_host, f"Ports:{len(recon_results['ports'])}_Endpoints:{len(recon_results['endpoints'])}")
         
         return recon_results
 
@@ -255,18 +290,24 @@ class YorHa_9S:
         sqli_result = self.test_sql_injection()
         if sqli_result:
             vulnerabilities.append(sqli_result)
+            # 🔐 TRACK: Vulnerability found
+            self.tracker.log_scan("VULN_FOUND", self.target_host, "SQL_Injection")
         
         # XSS Test
         self.print_status("Testing Cross-Site Scripting...", "SCANNING")
         xss_result = self.test_xss()
         if xss_result:
             vulnerabilities.append(xss_result)
+            # 🔐 TRACK: Vulnerability found
+            self.tracker.log_scan("VULN_FOUND", self.target_host, "XSS")
         
         # Security Misconfiguration
         self.print_status("Checking security headers...", "SCANNING")
         security_result = self.check_security_headers()
         if security_result:
             vulnerabilities.append(security_result)
+            # 🔐 TRACK: Vulnerability found
+            self.tracker.log_scan("VULN_FOUND", self.target_host, "Missing_Security_Headers")
         
         return vulnerabilities
 
@@ -368,6 +409,8 @@ class YorHa_9S:
             if result and result.status_code == 200:
                 successful_bypasses.append(technique.__name__)
                 self.print_status(f"Bypass successful: {technique.__name__}", "SUCCESS")
+                # 🔐 TRACK: WAF bypass successful
+                self.tracker.log_scan("WAF_BYPASS", self.target_host, technique.__name__)
         
         return successful_bypasses
 
