@@ -28,54 +28,33 @@
 - **Endpoint Discovery** - Temukan path tersembunyi
 - **Comprehensive Reporting** - Laporan detail
 
-## 🚀 Installation
+## 🛠️ Installation & Usage
+## 🛠️ Installation & Usage
 
-### **📱 Termux (Android)**
+### **Termux (Android)**
 ```bash
-
 pkg update && pkg upgrade
-pkg install python git -y
-
-
-pip install requests urllib3
-
-
+pkg install python git
 git clone https://github.com/XersesAnalyz/YorHa-9S-Scanner.git
 cd YorHa-9S-Scanner
-
-# Run the scanner
-python3 YorHa.py
-
-### **Linux**
-```bash
-
-sudo apt update && sudo apt install python3 python3-pip git -y
-
-  
 pip3 install requests urllib3
-
-
-git clone https://github.com/XersesAnalyz/YorHa-9S-Scanner.git
-cd YorHa-9S-Scanner
 python3 YorHa.py
-
-### **Windows**
-```bash
-
-pip install requests urllib3
+### **🛠️Linux/	Mac**
+sudo apt update && sudo apt install python3 python3-pip git
 git clone https://github.com/XersesAnalyz/YorHa-9S-Scanner.git
 cd YorHa-9S-Scanner
+pip3 install requests urllib3
+python3 YorHa.py
+### **Windows**
+# Install Python 3.8+ dari python.org
+# Install Git dari git-scm.com
+git clone https://github.com/XersesAnalyz/YorHa-9S-Scanner.git
+cd YorHa-9S-Scanner
+pip install requests urllib3
 python YorHa.py
 
-### **macOS**
-```bash
-
-Install Homebrew (jika belum ada)
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-
-brew install python git
-pip3 install requests urllib3
-
-git clone https://github.com/XersesAnalyz/YorHa-9S-Scanner.git
-cd YorHa-9S-Scanner
-python3 YorHa.py
+## ⚠️ Important Notes
+- Pastikan Python 3.8+ terinstall
+- Hanya gunakan untuk testing dengan IZIN
+- Tool akan meminta konfirmasi sebelum scanning
+- Gunakan dengan tanggung jawab!
