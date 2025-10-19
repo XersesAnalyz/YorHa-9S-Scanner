@@ -30,7 +30,7 @@
 
 # YorHa-9S-Scanner
 
-> Alat sederhana untuk scanning — **hanya untuk testing dengan izin**.
+>  — **hanya untuk testing dengan izin**.
 
 ---
 
