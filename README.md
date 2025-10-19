@@ -28,8 +28,15 @@
 - **Endpoint Discovery** - Temukan path tersembunyi
 - **Comprehensive Reporting** - Laporan detail
 
-## 🛠️ Installation & Usage
-### **Termux (Android)**
+# YorHa-9S-Scanner
+
+> Alat sederhana untuk scanning — **hanya untuk testing dengan izin**.
+
+---
+
+## 📦 Instalasi
+
+### Termux (Android)
 ```bash
 pkg update && pkg upgrade
 pkg install python git
@@ -37,22 +44,43 @@ git clone https://github.com/XersesAnalyz/YorHa-9S-Scanner.git
 cd YorHa-9S-Scanner
 pip3 install requests urllib3
 python3 YorHa.py
-### **🛠️Linux/	Mac**
+```
+
+### 🛠️ Linux / Mac
+```bash
 sudo apt update && sudo apt install python3 python3-pip git
 git clone https://github.com/XersesAnalyz/YorHa-9S-Scanner.git
 cd YorHa-9S-Scanner
 pip3 install requests urllib3
 python3 YorHa.py
-### **Windows**
+```
+
+### 🪟 Windows
+```powershell
 # Install Python 3.8+ dari python.org
 # Install Git dari git-scm.com
 git clone https://github.com/XersesAnalyz/YorHa-9S-Scanner.git
 cd YorHa-9S-Scanner
 pip install requests urllib3
 python YorHa.py
+```
+
+---
+
+## ⚙️ Penggunaan singkat
+1. Ikuti langkah instalasi sesuai OS kamu.  
+2. Jalankan `python3 YorHa.py` (atau `python YorHa.py` di Windows).  
+3. Ikuti instruksi yang muncul di terminal. Program mungkin akan meminta konfirmasi sebelum melakukan scanning.
+
+---
 
 ## ⚠️ Important Notes
-- Pastikan Python 3.8+ terinstall
-- Hanya gunakan untuk testing dengan IZIN
-- Tool akan meminta konfirmasi sebelum scanning
-- Gunakan dengan tanggung jawab!
+- Pastikan **Python 3.8+** sudah terpasang.  
+- **Hanya gunakan untuk testing** dengan **izin** dari pemilik target.  
+- Tool akan meminta konfirmasi sebelum menjalankan scanning.  
+- Gunakan dengan **tanggung jawab**.
+
+
+
+
+
