@@ -29,8 +29,6 @@
 - **Comprehensive Reporting** - Laporan detail
 
 ## 🛠️ Installation & Usage
-## 🛠️ Installation & Usage
-
 ### **Termux (Android)**
 ```bash
 pkg update && pkg upgrade
