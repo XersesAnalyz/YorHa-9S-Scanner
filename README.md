@@ -47,6 +47,7 @@ cd YorHa-9S-Scanner
 python3 YorHa.py
 
 ### **Linux**
+```bash
 
 sudo apt update && sudo apt install python3 python3-pip git -y
 
@@ -59,12 +60,16 @@ cd YorHa-9S-Scanner
 python3 YorHa.py
 
 ### **Windows**
+```bash
+
 pip install requests urllib3
 git clone https://github.com/XersesAnalyz/YorHa-9S-Scanner.git
 cd YorHa-9S-Scanner
 python YorHa.py
 
 ### **macOS**
+```bash
+
 Install Homebrew (jika belum ada)
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
