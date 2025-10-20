@@ -73,6 +73,24 @@ python YorHa.py
 3. Ikuti instruksi yang muncul di terminal. Program mungkin akan meminta konfirmasi sebelum melakukan scanning.
 
 ---
+## .LIHAT SEMUA LOG
+
+
+cat yorha_activity.log
+
+2. LIHAT LOG TERBARU (last 10 lines)
+
+tail -10 yorha_activity.log
+
+3. REAL-TIME MONITORING
+   
+tail -f yorha_activity.log
+
+
+4. FILTER BERDASARKAN USER
+
+grep "user_email_kamu" yorha_activity.log
+```
 
 ## ⚠️ Important Notes
 - Pastikan **Python 3.8+** sudah terpasang.  
